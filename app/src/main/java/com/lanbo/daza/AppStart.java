@@ -53,7 +53,7 @@ public class AppStart extends AppCompatActivity implements Animation.AnimationLi
     @Override
     public void onAnimationEnd(Animation animation) {
         //动画结束跳转主页面
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity2.class);
         this.startActivity(intent);
         this.overridePendingTransition(0, 0);
         this.finish();
