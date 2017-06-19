@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">DAZA</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="just_now">刚刚</string>
+    <string name="growingio_url_scheme">刚刚</string>
+    <string name="title_home">主页</string>
+    <string name="title_mine">我的</string>
+    <string name="title_mCoin">蜜金币</string>
+    <string name="title_shop_cart">购物车</string>
 </resources>
