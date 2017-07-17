@@ -6,6 +6,73 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="MaterialIndicator.Demo">
+        <item name="mi_indicatorColor">?android:attr/colorAccent</item>
+        <item name="mi_indicatorPadding">32dp</item>
+        <item name="mi_indicatorRadius">4dp</item>
     </style>
 
+    <style name="MaterialIndicator">
+        <item name="mi_indicatorRadius">4dp</item>
+        <item name="mi_indicatorColor">#ff009688</item>
+    </style>
+
+    <style name="common_button_style">
+        <item name="android:background">@drawable/selector_corners_button</item>
+        <item name="android:padding">6.0dip</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <!-- 操作项样式 start -->
+    <style name="option_item_rl">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ic_material</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">@dimen/space_12</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="option_item_text_parent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/space_4</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/main_black</item>
+        <item name="android:clickable">false</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+    <style name="option_item_text" parent="@style/option_item_text_parent">
+        <item name="android:drawablePadding">@dimen/space_8</item>
+        <!--<item name="android:textColor">?attr/textColor</item>-->
+    </style>
+
+    <style name="new_user_information_counts">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="user_formation_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="user_formation_info" parent="@style/user_formation_text">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="App.Theme.Dialog.Alert" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/black_alpha_240</item>
+    </style>
 </resources>

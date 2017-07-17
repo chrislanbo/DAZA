@@ -1,0 +1,64 @@
+/*
+ *RectImageView.java
+ *Classes：com.wxj.frame.view.RectImageView
+ *wangxiaojun Create at 2015-9-11 上午11:31:43	
+ */
+package com.monkey.framework.view;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.ImageView;
+
+/**
+ * Description: 
+ * com.wxj.frame.view.RectImageView
+ * @version $Revision: 1.0 $ 
+ * @author wangxiaojun
+ * @email 45960894@hotmail.com
+ * @date: 2015-9-11
+ * @time: 上午11:31:43
+ */
+public class RectWidthImageView extends ImageView {
+
+
+	/**
+	 * RectImageView
+	 */
+	public RectWidthImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+	}
+
+	/**
+	 * RectImageView
+	 */
+	public RectWidthImageView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	/**
+	 * RectImageView
+	 */
+	public RectWidthImageView(Context context) {
+		super(context);
+	}
+
+	
+	/**
+	 * @see ImageView#onMeasure(int, int)
+	 */
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        // For simple implementation, or internal size is always 0.
+        // We depend on the container to specify the layout size of
+        // our view. We can't really know what it is since we will be
+        // adding and removing different arbitrary views and do not
+        // want the layout to change as this happens.
+        setMeasuredDimension(getDefaultSize(0, widthMeasureSpec), getDefaultSize(0, heightMeasureSpec));
+ 
+        // Children are just made to fill our space.
+        int childWidthSize = getMeasuredWidth();
+        int childHeightSize = getMeasuredHeight();
+        //高度和宽度一样
+        heightMeasureSpec = widthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+}

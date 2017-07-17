@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+/**
+ * 系统自带tabBar + viewPager （类似效果）
+ */
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;

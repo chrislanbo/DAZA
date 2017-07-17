@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">MyFramework</string>
+    <string name="no_data">暂无数据</string>
+    <string name="downloading_update">正在下载更新</string>
+    <string name="start_download_update">开始下载更新</string>
+    <string name="download_update_stoped">下载更新暂停</string>
+    <string name="download_update_failed">下载更新失败</string>
+    <string name="download_update_complete">下载更新完成</string>
+    <string name="downloading">正在下载</string>
+    <string name="download_complete">下载完成</string>
+    <string name="download_stoped">下载暂停</string>
+    <string name="download_failed">下载失败</string>
+
+    <string name="txt_short"></string>
+</resources>

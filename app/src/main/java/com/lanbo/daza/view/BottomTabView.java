@@ -1,4 +1,4 @@
-package com.lanbo.daza;
+package com.lanbo.daza.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lanbo.daza.R;
+
 import java.util.List;
 
 /**
- * Created by 陈序员 on 2017/4/28.
- * Email: Matthew_Chen_1994@163.com
- * Blog: https://blog.ifmvo.cn
+ * 底部bottomTab
  */
 
 public class BottomTabView extends LinearLayout {
@@ -26,6 +26,10 @@ public class BottomTabView extends LinearLayout {
      * 记录最新的选择位置
      */
     private int lastPosition = -1;
+    /**
+     * 默认状态选择第一个
+     */
+    private int defaultPos = 0;
 
     /**
      * 所有 TabItem 的集合
@@ -136,10 +140,7 @@ public class BottomTabView extends LinearLayout {
             tab.setStatus(TabItemView.DEFAULT);
         }
 
-        /**
-         * 默认状态选择第一个
-         */
-        updatePosition(0);
+        updatePosition(defaultPos);
     }
 
     /**

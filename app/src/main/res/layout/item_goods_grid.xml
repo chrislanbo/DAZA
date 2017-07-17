@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="2dp">
+
+    <TextView
+        android:visibility="visible"
+        android:id="@+id/tv_more"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="点击查看更多"
+        android:textSize="13sp" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:id="@+id/ll_goods_data"
+        android:visibility="visible">
+
+        <com.lanbo.daza.view.GlideImageView.GlideImageView
+            android:id="@+id/giv_img"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="1dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_goods_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:paddingLeft="4dp"
+                android:gravity="top"
+                android:lineSpacingExtra="4dp"
+                android:lines="2"
+                android:maxLines="2"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_title_color"
+                android:textSize="13sp"
+                tools:text="Large Text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="2dp"
+                    android:maxLines="1"
+                    android:textColor="@color/green_200"
+                    android:textSize="15sp"
+                    tools:text="￥100.00" />
+
+                <ImageView
+                    android:id="@+id/iv_add_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/bg_event_type"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="2dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:textColor="#9d9d9d"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_link_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="left|center"
+                android:lines="1"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/text_secondary_color"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

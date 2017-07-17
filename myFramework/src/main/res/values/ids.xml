@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="img_back" type="id"/>
+    <!-- 左滑删除所需 -->
+    <item name="item_left_lay" type="id"/>
+    <item name="item_right_lay" type="id"/>
+</resources>

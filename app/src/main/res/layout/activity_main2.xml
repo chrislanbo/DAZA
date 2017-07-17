@@ -12,10 +12,10 @@
 
     </android.support.v4.view.ViewPager>
 
-    <com.lanbo.daza.BottomTabView
+    <com.lanbo.daza.view.BottomTabView
         android:id="@+id/bottomTabView"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-    </com.lanbo.daza.BottomTabView>
+    </com.lanbo.daza.view.BottomTabView>
 
 </LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_root_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ripple_item_clicked"
+            android:padding="10dp">
+
+            <com.lanbo.daza.view.GlideImageView.GlideImageView
+                android:id="@+id/giv_image"
+                android:layout_width="60dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/giv_image"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/giv_image"
+                android:ellipsize="end"
+                android:gravity="top|start"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:paddingBottom="6dp"
+                android:text="高膳食纤维，零反式脂肪，豹脂头奇亚籽饼干"
+                android:textColor="@color/font_black_0"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/giv_image"
+                android:text="￥158.00"
+                android:textColor="@color/font_black_5"
+                android:textSize="13sp"/>
+            <ImageView
+                android:id="@+id/add_cart"
+                android:layout_below="@+id/tv_title"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@null"
+                android:padding="2dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_nav_add_selector" />
+        </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/font_black_5"/>
+
+</LinearLayout>

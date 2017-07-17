@@ -6,4 +6,45 @@
     <color name="colorAccent">#FF4081</color>
     <color name="color_c4c4c4">#c4c4c4</color>
     <color name="color_009999">#009999</color>
+
+    !-- common -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#8f000000</color>
+
+    <!-- background -->
+    <color name="bg">#FFF5F5F5</color>
+    <color name="bg_pressed">#FFF2F2F2</color>
+    <color name="half_bg_pressed">#7FF2F2F2</color>
+
+    <!-- material design black font color -->
+    <color name="font_black_0">#212121</color>
+    <color name="font_black_1">#424242</color>
+    <color name="font_black_2">#616161</color>
+    <color name="font_black_3">#757575</color>
+    <color name="font_black_4">#9e9e9e</color>
+    <color name="font_black_5">#bdbdbd</color>
+    <color name="font_black_6">#e0e0e0</color>
+
+    <!-- divider -->
+    <color name="divider_1">#e2e2e2</color>
+    <color name="divider_2">#e6e6e6</color>
+
+    <color name="bg_press">#ebebeb</color>
+    <color name="bg_press_material">#d4d4d4</color>
+
+    <color name="text_title_color">#111111</color>
+    <color name="text_desc_color">#6a6a6a</color>
+    <color name="text_secondary_color">#9d9d9d</color>
+    <color name="text_light">#3f000000</color>
+
+    <color name="main_link_text_color">#ffbedfff</color>
+    <color name="timeline_clickable_text_highlighted_background">#ffbedfff</color>
+
+
+    <color name="main_black">#333</color>
+    <color name="list_divider_color">#c8c7cc</color>
+    <color name="user_info_message_notice">#E35B5A</color>
+
 </resources>
