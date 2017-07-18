@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -18,6 +19,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    greendao {
+        schemaVersion 1 //数据库版本号
+        daoPackage 'com.usher.greendao_demo.greendao.gen' //自动生成的工具类的包名
+        targetGenDir 'src/main/java' //路径
     }
 }
 
@@ -38,4 +44,5 @@ dependencies {
     compile project(path: ':myFramework')
     compile 'org.jsoup:jsoup:1.9.2'
     compile 'com.google.code.gson:gson:2.8.1'
+    compile 'org.greenrobot:greendao:3.2.2'
 }

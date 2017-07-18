@@ -2,6 +2,7 @@ package com.lanbo.daza.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -60,7 +61,17 @@ public class Fragment4 extends Fragment {
         ButterKnife.bind(this, view);
 
         initView();
+        initListener();
         return view;
+    }
+
+    private void initListener() {
+        tv_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, UserInfoActivity.class));
+            }
+        });
     }
 
     private void initView() {
@@ -74,6 +85,7 @@ public class Fragment4 extends Fragment {
         ll_login_info.setVisibility(View.VISIBLE);
         tv_code.setText(code);
         tv_username.setText(username);
+        tv_setting.setVisibility(View.VISIBLE);
         tv_num_all_order.setVisibility(View.VISIBLE);
         tv_num_all_order.setText(all_order);
 

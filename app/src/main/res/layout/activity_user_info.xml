@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/state_bar" />
+
+    <!--titleBar-->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/title_icon_left"
+                android:layout_width="@dimen/app_title_icon_size"
+                android:layout_height="@dimen/app_title_icon_size"
+                android:src="@android:drawable/ic_dialog_info" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_bar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:text="个人信息"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/title_icon_right"
+                android:layout_width="@dimen/app_title_icon_size"
+                android:layout_height="@dimen/app_title_icon_size"
+                android:src="@android:drawable/ic_dialog_email" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_material"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <View
+                android:visibility="gone"
+                style="@style/h_line"
+                android:layout_height="4dp"
+                android:background="@color/list_divider_color2" />
+
+            <!--头像-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_head_pic"
+                    style="@style/option_item_rl">
+
+                    <TextView
+                        style="@style/option_item_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="头像" />
+
+                    <ImageView
+                        android:id="@+id/iv_head_pic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/icon_01" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/ic_arrow_right" />
+                </LinearLayout>
+
+                <View
+                    style="@style/h_line"
+                    android:layout_height="1px"
+                    android:background="@color/list_divider_color" />
+
+            </LinearLayout>
+
+            <!--昵称-->
+            <LinearLayout
+                style="@style/option_item_rl"
+                android:layout_height="@dimen/app_item_height_44dp">
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="昵称" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:text="亏大" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/h_line"
+                android:layout_height="1px"
+                android:background="@color/list_divider_color" />
+            <!--昵称-->
+            <LinearLayout
+                style="@style/option_item_rl"
+                android:layout_height="@dimen/app_item_height_44dp">
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="CODE码" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:text="77265969797" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/h_line"
+                android:layout_height="1px"
+                android:background="@color/list_divider_color" />
+            <!--昵称-->
+            <LinearLayout
+                style="@style/option_item_rl"
+                android:layout_height="@dimen/app_item_height_44dp">
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="手机" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:text="167887667278" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/h_line"
+                android:layout_height="1px"
+                android:background="@color/list_divider_color" />
+            <!--昵称-->
+            <LinearLayout
+                style="@style/option_item_rl"
+                android:layout_height="@dimen/app_item_height_44dp">
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="性别" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:text="男" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/h_line"
+                android:layout_height="1px"
+                android:background="@color/list_divider_color" />
+            <!--昵称-->
+            <LinearLayout
+                style="@style/option_item_rl"
+                android:layout_height="@dimen/app_item_height_44dp">
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="微信" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:text="21313213121" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/h_line"
+                android:layout_height="1px"
+                android:background="@color/list_divider_color" />
+            <!--昵称-->
+            <LinearLayout
+                style="@style/option_item_rl"
+                android:layout_height="@dimen/app_item_height_44dp">
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="收货地址" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/h_line"
+                android:layout_height="1px"
+                android:background="@color/list_divider_color" />
+            <!--昵称-->
+            <LinearLayout
+                style="@style/option_item_rl"
+                android:layout_height="@dimen/app_item_height_44dp">
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="修改密码" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_arrow_right" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/h_line"
+                android:layout_height="1px"
+                android:background="@color/list_divider_color" />
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:text="退出登录"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

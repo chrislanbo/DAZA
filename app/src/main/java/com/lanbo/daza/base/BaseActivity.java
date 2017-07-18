@@ -20,7 +20,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     protected LayoutInflater mInflater;
     protected ActionBar mActionBar;
 
-    private final String packageName4Umeng = this.getClass().getName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -19,11 +19,13 @@ import android.widget.TextView;
 
 import com.lanbo.daza.MyApplication;
 import com.lanbo.daza.R;
+import com.lanbo.daza.adapter.NewsAdapter;
 import com.lanbo.daza.adapter.TravelingAdapter;
 import com.lanbo.daza.model.ChannelEntity;
 import com.lanbo.daza.model.FilterData;
 import com.lanbo.daza.model.FunctionEntity;
 import com.lanbo.daza.model.GoodsEntity;
+import com.lanbo.daza.model.NewsEntity;
 import com.lanbo.daza.model.OperationEntity;
 import com.lanbo.daza.model.TravelingEntity;
 import com.lanbo.daza.utils.ColorUtil;
@@ -99,6 +101,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     private List<TravelingEntity> travelingList = new ArrayList<>(); // ListView数据
     private List<GoodsEntity> goodsList = new ArrayList<>();; // ListView数据
     private List<FunctionEntity> funcList = new ArrayList<>();; // ListView数据
+    private List<NewsEntity> newsList = new ArrayList<>();; // ListView数据
 
     private HeaderBannerView headerBannerView; // 广告视图
     private HeaderChannelView headerChannelView; // 频道视图
@@ -113,6 +116,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     private HeaderFilterView headerFilterView; // 分类筛选视图
     private FilterData filterData; // 筛选数据
     private TravelingAdapter mAdapter;
+    private NewsAdapter newsAdapter;
 
     private int titleViewHeight = 65; // 标题栏的高度
 
@@ -158,6 +162,9 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
         Thread netThread = new Thread() {
             @Override
             public void run() {
+                // 获取新闻
+                getNews();
+
                 try {
                     //从一个URL加载一个Document对象
                     Document doc = Jsoup.connect(baseUrl).get();
@@ -191,8 +198,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 // 获取首页最新资讯
 //                getTopNews();
 
-                // 获取新闻
-                getNews();
+
 
                 ArrayList orderNum = getOrderNum(header);
 
@@ -201,6 +207,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 }
 
                 getInfo(header);
+                getGoodsBanner();
 //                地址
                 try {
                     Document doc = Jsoup.connect(addressInfoUrl).header("token",header.get("token")).get();
@@ -237,6 +244,23 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
         };
         netThread.start();
 
+    }
+
+    private void getGoodsBanner() {
+        try {
+            Document doc = Jsoup.connect(baseUrl).get();
+            Elements elements = doc.select("div.swiper-slide").select("a");
+            for (Element e : elements) {
+                String href = e.attr("href");
+                int i = href.indexOf("=");
+                String id = href.substring(i + 1);
+                String attr = elements.select("img").attr("src");
+                Log.i("商品页轮播","\n" + "id = "+id +"\n" +  " attr = "+attr+"\n");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -293,6 +317,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 newsUrl = fixUrl(newsUrl,basewwwUrl);
                 String newsTitle = links.select("div").select("h3").text();
                 String newsContent = links.select("div").select("p").text();
+                newsList.add(new NewsEntity(newsUrl,newsImg,newsContent,newsTitle));
                 Log.i("新闻","\n" + "newsImg = "+newsImg +"\n" +  " newsUrl="+newsUrl+"\n" + "newsTitle=" +newsTitle+"\n" + "newsContent=" +newsContent);
             }
 
@@ -307,6 +332,10 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
             Elements infoEle = doc.select("div.personalInfo");
             Document document = Jsoup.parse(infoEle.toString());
             Elements links = document.getElementsByTag("li");
+            String head_pic_url = links.select("img.now_head_pic").attr("src"); // 头像
+            head_pic_url = fixUrl(head_pic_url,baseUrl);
+            String[] split = head_pic_url.split(".jpg");
+            head_pic_url = split[0]+".jpg";
             String username = links.select("p.name").text(); // 昵称
             String sex = links.select("p.xingbie").text(); // 昵称
             String phone = links.select("p.shouji").text(); // 昵称
@@ -323,9 +352,10 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
             address = fixUrl(address,baseUrl);
             String changePwd = "/Mobile/user/reset_password.html";
             changePwd = fixUrl(changePwd,baseUrl);
-            Log.i("新闻","\n" +  " username="+username+"\n" + "sex=" +sex+"\n" + "phone=" +phone
+            Log.i("新闻","\n" + "head_pic_url = "+head_pic_url +"\n" +  " username="+username+"\n" + "sex=" +sex+"\n" + "phone=" +phone
                     +"\n" + "weixin=" +weixin+"\n" + "address=" +address+"\n" + "changePwd=" +changePwd +"\n" + "code码=" +code );
 
+//            PreferencesUtils.putString(mContext,INFO_HEAD_PIC,head_pic_url);
             PreferencesUtils.putString(mContext,INFO_USERNAME,username);
             PreferencesUtils.putString(mContext,INFO_SEX,sex);
             PreferencesUtils.putString(mContext,INFO_PHONE,phone);
@@ -411,8 +441,10 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
         headerTitleView = new HeaderTitleView(mActivity,"蜜 / 家 / 热 / 点");
         headerTitleView.fillView("", smoothListView);
         // 设置ListView数据
-        mAdapter = new TravelingAdapter(mContext, travelingList);
-        smoothListView.setAdapter(mAdapter);
+//        mAdapter = new TravelingAdapter(mContext, travelingList);
+//        smoothListView.setAdapter(mAdapter);
+        newsAdapter = new NewsAdapter(mContext,newsList);
+        smoothListView.setAdapter(newsAdapter);
 
         filterViewPosition = smoothListView.getHeaderViewsCount() - 1;
     }

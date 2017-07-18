@@ -73,8 +73,8 @@
 
             <com.lanbo.daza.view.GlideImageView.GlideImageView
                 android:id="@+id/iv_icon_head"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/banner3"
                 />
@@ -134,7 +134,7 @@
             android:layout_marginRight="15dp"
             android:gravity="center_vertical"
             android:text="编辑"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textColor="@color/white" />
 
     </RelativeLayout>
@@ -462,7 +462,7 @@
                     style="@style/h_line"
                     android:layout_height="1px"
                     android:layout_marginStart="52dp"
-                    android:background="@color/list_divider_color" />
+                    android:background="@color/divider_1" />
 
             </LinearLayout>
 

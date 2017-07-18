@@ -63,6 +63,8 @@
         <activity
             android:name=".view.gradationscroll.BannerActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.UserInfoActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
