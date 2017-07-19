@@ -14,6 +14,18 @@
     <string name="smoothlistview_footer_hint_normal">查看更多</string>
     <string name="smoothlistview_footer_hint_ready">松开载入更多</string>
 
+    <string name="title_activity_login">登录</string>
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录/注册</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="error_invalid_email">手机号输入有误</string>
+    <string name="error_invalid_password">密码太短</string>
+    <string name="error_incorrect_password">密码不符合规格</string>
+    <string name="error_field_required">这个需要填</string>
+    <string name="permission_rationale">"权限需要"
+    </string>
+
     <string-array name="data">
         <item>我是第一行数据</item>
         <item>我是第二行数据</item>
@@ -31,4 +43,5 @@
         <item>我是第二行数据</item>
         <item>我是第二行数据</item>
     </string-array>
+
 </resources>

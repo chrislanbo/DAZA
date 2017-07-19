@@ -21,6 +21,7 @@ import com.lanbo.daza.view.GlideImageView.GlideImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Fragment4 extends Fragment {
 
@@ -66,14 +67,41 @@ public class Fragment4 extends Fragment {
     }
 
     private void initListener() {
-        tv_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mActivity, UserInfoActivity.class));
-            }
-        });
     }
 
+    @OnClick({R.id.tv_setting})
+    public void userInfo() {
+        Intent i = new Intent(mActivity, UserInfoActivity.class);
+        startActivity(i,false);
+    }
+
+    @OnClick({R.id.iv_icon_head})
+    public void login() {
+        Intent i = new Intent(mActivity, LoginActivity.class);
+        startActivity(i);
+    }
+
+    /**
+     * 跳转
+     * @param intent 目标意图
+     * @param isNeedLogin 是否需要登录态
+     */
+    public void startActivity(Intent intent, boolean isNeedLogin) {
+
+        if (isNeedLogin) {
+            if(MyApplication.isLogin()){
+                Log.i(TAG,"已经登录");
+                super.startActivity(intent);
+            } else {
+                Log.i(TAG,"跳转登录");
+                MyApplication.getInstance().putIntent(intent); //存起来后面登录完成后跳转
+                Intent i = new Intent(mActivity, LoginActivity.class);
+                super.startActivity(i);
+            }
+        } else {
+            super.startActivity(intent);
+        }
+    }
     private void initView() {
         String pic_head = PreferencesUtils.getString(mContext, Constant.INFO_HEAD_PIC);
         String username = PreferencesUtils.getString(mContext, Constant.INFO_USERNAME);

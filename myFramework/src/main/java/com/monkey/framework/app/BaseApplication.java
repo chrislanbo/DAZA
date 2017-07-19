@@ -13,6 +13,9 @@ public class BaseApplication extends Application {
         afterInject();
     }
 
+    /**
+     * onCreate之后调用
+     */
     protected void afterInject(){
 
     }

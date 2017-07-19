@@ -1,8 +1,10 @@
 package com.lanbo.daza;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.lanbo.daza.model.UserInfo;
 import com.monkey.framework.app.BaseApplication;
 import com.monkey.framework.utils.PersonelSP;
 
@@ -19,6 +21,14 @@ import java.util.Map;
 public class MyApplication extends BaseApplication {
 
     private static Map<String, String> header = new HashMap<>();
+    private static MyApplication mInstance;
+    private UserInfo userInfo;
+
+    public static MyApplication getInstance() {
+        if (mInstance == null)
+            mInstance = new MyApplication();
+        return mInstance;
+    }
 
     @Override
     protected void afterInject() {
@@ -49,5 +59,21 @@ public class MyApplication extends BaseApplication {
 
     public static boolean isLogin() {
         return !TextUtils.isEmpty(header.get("token"));
+    }
+
+    private Intent intent;
+
+    /**
+     * 保存登录意图
+     */
+    public void putIntent(Intent intent) {
+        this.intent = intent;
+    }
+
+    /**
+     * 获取登录意图
+     */
+    public Intent getIntent() {
+        return this.intent;
     }
 }
