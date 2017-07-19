@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    Log.i("sadad","点击键盘完成按钮");
+                    Log.i("sadad", "点击键盘完成按钮");
                     attemptLogin();
                     return true;
                 }
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             mPasswordComfirm.setError("请确认密码");
             focusView = mPasswordComfirm;
             cancel = true;
-        } else if (!TextUtils.isEmpty(password_confirm) && !checkPwd(password,password_confirm)) {
+        } else if (!TextUtils.isEmpty(password_confirm) && !checkPwd(password, password_confirm)) {
             mPasswordComfirm.setError("密码输入不一致");
             focusView = mPasswordComfirm;
             cancel = true;
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
             mMsgCode.setError("验证码不能为空");
             focusView = mMsgCode;
             cancel = true;
-        } else if (!TextUtils.isEmpty(code) && code.length()<6 ) {
+        } else if (!TextUtils.isEmpty(code) && code.length() < 6) {
             mMsgCode.setError("验证码输入有误");
             focusView = mMsgCode;
             cancel = true;
@@ -145,18 +145,19 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean checkPhone(String str) {
         // TODO: 2017/7/19 检查手机号码
-        if (str.length()==11 && str.startsWith("1")){
+        if (str.length() == 11 && str.startsWith("1")) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     private boolean checkPwd(String password) {
-        return (password!=null && password.length()>3);
+        return (password != null && password.length() > 3);
     }
-    private boolean checkPwd(String password,String confirm) {
-        return (password!=null && password.length()>3 && password.equals(confirm));
+
+    private boolean checkPwd(String password, String confirm) {
+        return (password != null && password.length() > 3 && password.equals(confirm));
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -192,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
         private final String mEmail;
         private final String mPassword;
 
-            UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
         }
