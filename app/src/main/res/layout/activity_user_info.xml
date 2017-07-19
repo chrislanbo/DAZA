@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/state_bar" />
 
     <!--titleBar-->
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -37,7 +36,7 @@
             android:gravity="center_vertical"
             android:text="个人信息"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:visibility="visible" />
 
         <LinearLayout
@@ -70,10 +69,10 @@
             android:paddingRight="8dp">
 
             <View
-                android:visibility="gone"
                 style="@style/h_line"
                 android:layout_height="4dp"
-                android:background="@color/list_divider_color2" />
+                android:background="@color/list_divider_color2"
+                android:visibility="gone" />
 
             <!--头像-->
             <LinearLayout
@@ -83,7 +82,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/ll_head_pic"
+                    android:id="@+id/ll_info_pic"
                     style="@style/option_item_rl">
 
                     <TextView
@@ -92,7 +91,7 @@
                         android:layout_weight="1"
                         android:text="头像" />
 
-                    <ImageView
+                    <com.lanbo.daza.view.GlideImageView.GlideImageView
                         android:id="@+id/iv_head_pic"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
@@ -116,6 +115,7 @@
 
             <!--昵称-->
             <LinearLayout
+                android:id="@+id/ll_info_username"
                 style="@style/option_item_rl"
                 android:layout_height="@dimen/app_item_height_44dp">
 
@@ -126,6 +126,7 @@
                     android:text="昵称" />
 
                 <TextView
+                    android:id="@+id/tv_info_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
@@ -145,6 +146,7 @@
                 android:background="@color/list_divider_color" />
             <!--昵称-->
             <LinearLayout
+                android:id="@+id/ll_info_code"
                 style="@style/option_item_rl"
                 android:layout_height="@dimen/app_item_height_44dp">
 
@@ -155,6 +157,7 @@
                     android:text="CODE码" />
 
                 <TextView
+                    android:id="@+id/tv_info_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
@@ -168,6 +171,7 @@
                 android:background="@color/list_divider_color" />
             <!--昵称-->
             <LinearLayout
+                android:id="@+id/ll_info_phone"
                 style="@style/option_item_rl"
                 android:layout_height="@dimen/app_item_height_44dp">
 
@@ -178,6 +182,7 @@
                     android:text="手机" />
 
                 <TextView
+                    android:id="@+id/tv_info_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
@@ -191,6 +196,7 @@
                 android:background="@color/list_divider_color" />
             <!--昵称-->
             <LinearLayout
+                android:id="@+id/ll_info_sex"
                 style="@style/option_item_rl"
                 android:layout_height="@dimen/app_item_height_44dp">
 
@@ -201,6 +207,7 @@
                     android:text="性别" />
 
                 <TextView
+                    android:id="@+id/tv_info_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
@@ -220,6 +227,7 @@
                 android:background="@color/list_divider_color" />
             <!--昵称-->
             <LinearLayout
+                android:id="@+id/ll_info_weixin"
                 style="@style/option_item_rl"
                 android:layout_height="@dimen/app_item_height_44dp">
 
@@ -230,6 +238,7 @@
                     android:text="微信" />
 
                 <TextView
+                    android:id="@+id/tv_info_weixin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
@@ -249,6 +258,7 @@
                 android:background="@color/list_divider_color" />
             <!--昵称-->
             <LinearLayout
+                android:id="@+id/ll_info_address"
                 style="@style/option_item_rl"
                 android:layout_height="@dimen/app_item_height_44dp">
 
@@ -272,6 +282,7 @@
                 android:background="@color/list_divider_color" />
             <!--昵称-->
             <LinearLayout
+                android:id="@+id/ll_info_reset_pwd"
                 style="@style/option_item_rl"
                 android:layout_height="@dimen/app_item_height_44dp">
 
@@ -293,18 +304,21 @@
                 style="@style/h_line"
                 android:layout_height="1px"
                 android:background="@color/list_divider_color" />
+<!--退出登录-->
             <RelativeLayout
-                android:layout_marginTop="10dp"
+                android:id="@+id/rl_info_unlogin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Button
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/white"
+                    android:background="@drawable/selector_corners_button"
                     android:text="退出登录"
-                    />
+                    android:textColor="@color/white" />
             </RelativeLayout>
 
         </LinearLayout>

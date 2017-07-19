@@ -38,3 +38,17 @@ http://app.mituomi.com/Mobile/user/ajax_delete_d.html
 
 修改密码
 http://app.mituomi.com/Mobile/user/reset_password.html
+
+
+添加单个商品到购物车
+http://app.mituomi.com/index.php?m=Home&c=Cart&a=ajaxAddCart
+goods_id=157
+goods_num=1
+goods_spec=0
+
+添加多个商品到购物车
+http://app.mituomi.com/index.php?m=Home&c=Cart&a=ajaxAddCart
+goods_id=157
+goods_num=21
+goods_spec=0
+sub=0
