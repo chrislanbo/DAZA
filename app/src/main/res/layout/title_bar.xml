@@ -1,40 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="44dp"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
+    <!--左侧icon-->
     <LinearLayout
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
         <ImageView
             android:id="@+id/title_icon_left"
             android:layout_width="@dimen/app_title_icon_size"
             android:layout_height="@dimen/app_title_icon_size"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/app_title_icon_size"
+                android:layout_height="@dimen/app_title_icon_size"
+                android:src="@drawable/ic_kind" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分类"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
+    <!--中间标题-->
     <TextView
         android:id="@+id/title_bar_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center"
         android:text="标题"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 
+    <!--中间搜索框-->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:visibility="visible">
+
+        <View
+            android:id="@+id/view_title_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_xml_search" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="搜索商品"
+            android:textColor="@color/font_black_3"
+            android:textSize="11sp" />
+    </FrameLayout>
+
+    <!--右侧icon-->
     <LinearLayout
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:layout_marginRight="8dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
         <ImageView
             android:id="@+id/title_icon_right"
@@ -43,4 +97,4 @@
             android:src="@drawable/ic_more" />
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>
