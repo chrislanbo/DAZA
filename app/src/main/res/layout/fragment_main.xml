@@ -26,29 +26,19 @@
             android:clickable="true"
             android:visibility="visible">
 
-            <FrameLayout
-                android:id="@+id/fl_action_more1"
+            <!--左侧icon-->
+            <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:padding="2dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="15dp">
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/icon_scan" />
 
-                <View
-                    android:id="@+id/view_action_more_bg1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/xml_oval_half_transparent_bg" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/ic_action_more" />
-            </FrameLayout>
-
+            <!--中间-->
             <FrameLayout
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
@@ -69,12 +59,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:drawablePadding="2dp"
                     android:gravity="center_vertical"
                     android:text="搜索商品"
-                    android:textSize="11sp" />
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
             </FrameLayout>
 
+            <!--右侧-->
             <FrameLayout
                 android:id="@+id/fl_action_more"
                 android:layout_width="30dp"
@@ -95,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_action_more" />
+                    android:src="@drawable/icon_msg" />
             </FrameLayout>
         </RelativeLayout>
     </LinearLayout>

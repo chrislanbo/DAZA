@@ -9,6 +9,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="MaterialIndicator.Demo">
         <item name="mi_indicatorColor">?android:attr/colorAccent</item>
         <item name="mi_indicatorPadding">32dp</item>
@@ -48,6 +49,7 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
+
     <style name="option_item_text" parent="@style/option_item_text_parent">
         <item name="android:drawablePadding">@dimen/space_8</item>
         <!--<item name="android:textColor">?attr/textColor</item>-->
@@ -74,5 +76,10 @@
 
     <style name="App.Theme.Dialog.Alert" parent="ThemeOverlay.AppCompat.Dialog.Alert">
         <item name="android:textColorPrimary">@color/black_alpha_240</item>
+    </style>
+
+    <style name="AnimList">
+        <item name="android:windowEnterAnimation">@anim/list_pop_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/list_pop_hidden_anim</item>
     </style>
 </resources>

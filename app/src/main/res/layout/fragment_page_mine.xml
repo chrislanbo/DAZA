@@ -73,33 +73,31 @@
 
             <com.lanbo.daza.view.GlideImageView.GlideImageView
                 android:id="@+id/iv_icon_head"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/banner3"
-                />
+                android:src="@drawable/banner3" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="20dp">
 
                 <LinearLayout
                     android:id="@+id/ll_login_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    >
+                    android:visibility="visible">
+
                     <TextView
                         android:id="@+id/tv_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="用户名"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
-                        />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/tv_code"
@@ -109,7 +107,7 @@
                         android:text="TS938765971"
                         android:textColor="@color/white"
                         android:textSize="13sp"
-                        />
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -121,7 +119,7 @@
                     android:text="登录/注册"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -134,8 +132,8 @@
             android:layout_marginRight="15dp"
             android:gravity="center_vertical"
             android:text="编辑"
-            android:visibility="visible"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="visible" />
 
     </RelativeLayout>
 
@@ -153,16 +151,39 @@
             style="@style/new_user_information_counts"
             android:gravity="center">
 
-            <TextView
-                android:id="@+id/tv_tweet"
-                style="@style/user_formation_text"
-                android:ellipsize="none"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:maxLines="1"
-                android:padding="0dp"
-                android:text="0"
-                android:textSize="@dimen/font_24" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="0dp"
+                    android:src="@drawable/icon_pay" />
+
+                <TextView
+                    android:id="@+id/user_info_notice_fans1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="14dp"
+                    android:layout_gravity="right|top"
+                    android:background="@drawable/ic_red_dot"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:minWidth="14dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_10"
+                    android:visibility="gone"
+                    tools:text="9"
+                    tools:visibility="visible" />
+            </FrameLayout>
 
             <TextView
                 style="@style/user_formation_info"
@@ -176,16 +197,39 @@
             style="@style/new_user_information_counts"
             android:gravity="center">
 
-            <TextView
-                android:id="@+id/tv_favorite"
-                style="@style/user_formation_text"
-                android:ellipsize="none"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:maxLines="1"
-                android:padding="0dp"
-                android:text="0"
-                android:textSize="@dimen/font_24" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="0dp"
+                    android:src="@drawable/icon_fahuo" />
+
+                <TextView
+                    android:id="@+id/user_info_notice_fans2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="14dp"
+                    android:layout_gravity="right|top"
+                    android:background="@drawable/ic_red_dot"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:minWidth="14dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_10"
+                    android:visibility="gone"
+                    tools:text="9"
+                    tools:visibility="visible" />
+            </FrameLayout>
 
             <TextView
                 style="@style/user_formation_info"
@@ -199,57 +243,25 @@
             style="@style/new_user_information_counts"
             android:gravity="center">
 
-            <TextView
-                android:id="@+id/tv_following"
-                style="@style/user_formation_text"
-                android:ellipsize="none"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:maxLines="1"
-                android:padding="0dp"
-                android:text="0"
-                android:textSize="@dimen/font_24" />
-
-            <TextView
-                style="@style/user_formation_info"
-                android:layout_marginBottom="0dp"
-                android:padding="0dp"
-                android:text="待收货" />
-        </LinearLayout>
-        <!--4-->
-        <LinearLayout
-            android:id="@+id/ly_follower"
-            style="@style/new_user_information_counts"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/lay_12"
-            android:paddingRight="@dimen/lay_12">
-
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal">
 
-                <TextView
-                    android:id="@+id/tv_follower"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:ellipsize="none"
-                    android:lines="1"
-                    android:maxLines="1"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:padding="0dp"
-                    android:text="0"
-                    android:textSize="@dimen/font_24" />
+                    android:src="@drawable/icon_shouhuo" />
 
                 <TextView
-                    android:id="@+id/user_info_notice_fans"
+                    android:id="@+id/user_info_notice_fans3"
                     android:layout_width="wrap_content"
                     android:layout_height="14dp"
                     android:layout_gravity="right|top"
-                    android:layout_marginTop="2dp"
                     android:background="@drawable/ic_red_dot"
                     android:ellipsize="none"
                     android:gravity="center"
@@ -261,19 +273,61 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_10"
                     android:visibility="gone"
-                    tools:text="2"
+                    tools:text="9"
                     tools:visibility="visible" />
             </FrameLayout>
 
             <TextView
                 style="@style/user_formation_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginBottom="0dp"
                 android:padding="0dp"
-                android:text="全部订单"
-                android:textSize="@dimen/font_12" />
+                android:text="待收货" />
+        </LinearLayout>
+        <!--4-->
+        <LinearLayout
+            android:id="@+id/ly_follower"
+            style="@style/new_user_information_counts"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="0dp"
+                    android:src="@drawable/icon_all_order" />
+
+                <TextView
+                    android:id="@+id/user_info_notice_fans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="14dp"
+                    android:layout_gravity="right|top"
+                    android:background="@drawable/ic_red_dot"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:minWidth="14dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_10"
+                    android:visibility="gone"
+                    tools:text="9"
+                    tools:visibility="gone" />
+            </FrameLayout>
+
+            <TextView
+                style="@style/user_formation_info"
+                android:layout_marginBottom="0dp"
+                android:padding="0dp"
+                android:text="全部订单" />
 
         </LinearLayout>
     </LinearLayout>
@@ -297,8 +351,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/rl_message"
@@ -503,9 +557,9 @@
             </LinearLayout>
 
             <View
-                style="@style/h_line"
+                android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:background="@color/list_divider_color" />
+                android:background="@color/list_divider_color2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
