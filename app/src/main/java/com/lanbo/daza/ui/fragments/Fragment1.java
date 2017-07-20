@@ -1,4 +1,4 @@
-package com.lanbo.daza.ui;
+package com.lanbo.daza.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,6 +28,7 @@ import com.lanbo.daza.model.GoodsEntity;
 import com.lanbo.daza.model.NewsEntity;
 import com.lanbo.daza.model.OperationEntity;
 import com.lanbo.daza.model.TravelingEntity;
+import com.lanbo.daza.ui.AboutActivity;
 import com.lanbo.daza.utils.ColorUtil;
 import com.lanbo.daza.utils.DensityUtil;
 import com.lanbo.daza.utils.ModelUtil;

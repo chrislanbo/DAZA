@@ -1,4 +1,4 @@
-package com.lanbo.daza.ui;
+package com.lanbo.daza.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.lanbo.daza.Constant;
 import com.lanbo.daza.MyApplication;
 import com.lanbo.daza.R;
+import com.lanbo.daza.ui.LoginActivity;
+import com.lanbo.daza.ui.UserInfoActivity;
 import com.lanbo.daza.utils.PreferencesUtils;
 import com.lanbo.daza.view.GlideImageView.GlideImageView;
 

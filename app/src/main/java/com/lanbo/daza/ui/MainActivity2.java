@@ -5,22 +5,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.lanbo.daza.R;
-import com.lanbo.daza.model.GoodsEntity;
+import com.lanbo.daza.ui.fragments.Fragment1;
+import com.lanbo.daza.ui.fragments.Fragment2;
+import com.lanbo.daza.ui.fragments.Fragment3;
+import com.lanbo.daza.ui.fragments.Fragment4;
 import com.lanbo.daza.view.BottomTabView;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import java.util.ArrayList;
-import java.util.List;
-
-import static com.lanbo.daza.Constant.GLOD;
-import static com.lanbo.daza.Constant.baseUrl;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -72,88 +65,7 @@ public class MainActivity2 extends AppCompatActivity {
         bottomTabView.setTabItemViews(tabItemViews);
 
         bottomTabView.setUpWithViewPager(viewPager);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-//                getGoodsFromHtml();
-            }
-        }).start();
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                getCoinGoodsFromHtml();
-//            }
-//        }).start();
-    }
-    private List<GoodsEntity> goodsList = new ArrayList<>();
-
-    private void getGoodsFromHtml() {
-
-        try {
-            //从一个URL加载一个Document对象
-            Document doc = Jsoup.connect(baseUrl).get();
-            Elements elements = doc.select("div.indexUl"); // 首页商品
-//            Document doc2 = Jsoup.parse(elements.toString());
-//            Elements elements2 = doc2.getElementsByTag("ul");
-            Document divcontions = Jsoup.parse(elements.toString());
-            Elements element = divcontions.getElementsByTag("li");
-//            Log.i("element", element.toString());
-            for (Element links : element) {
-                String link_no_host = links.select("a").attr("href").trim();
-                String imgUrl = links.select("img").attr("src").trim();
-                String goods_id = links.select("input").attr("value").trim();
-                Elements title = links.select("p");
-                String goods_name = title.text();
-                Elements elementsPrice = links.select("div.price");
-                String price = elementsPrice.text();
-                Log.i("商品信息", "\n\n" + "link_no_host = " + link_no_host + "\n" + "imgUrl = " + imgUrl + "\n" + "goods_id = " + goods_id + "\n" + "goods_name = " + goods_name + "\n" + "price = " + price + "\n");
-                goodsList.add(new GoodsEntity(link_no_host, imgUrl, goods_id, goods_name, price));
-            }
-
-        } catch (Exception e) {
-            Log.i("mytag", e.toString());
-        }
-        Log.w(TAG,"商品数据准备完毕");
 
     }
-
-    private void getCoinGoodsFromHtml() {
-        try {
-            //从一个URL加载一个Document对象
-            Document doc = Jsoup.connect(baseUrl + GLOD).get();
-            Elements coinE = doc.select("em"); //
-            String coin = coinE.text();
-            if (coin.length() == 0) {
-                coin = "0";
-            }
-
-            Elements coinGoods = doc.select("div.goldShopCon"); //金币商品
-            Elements element = coinGoods.select("li");
-//            Elements element = doc.getElementsByTag("li");
-            Log.i("coin", "" + coin);
-            for (Element links : element) {
-                String link_no_host = links.select("a").attr("href").trim();
-                String imgUrl = links.select("img").attr("src").trim();
-                if (imgUrl.length() == 0) {
-                    String lazyUrl = links.select("img").attr("data-original").trim();
-                    imgUrl = (lazyUrl.startsWith("http")) ? lazyUrl : baseUrl + lazyUrl;
-                }
-                int index = link_no_host.lastIndexOf("=");
-                String goods_id = link_no_host.substring(index + 1);
-                Elements title = links.select("p");
-                String goods_name = title.text();
-                Elements elementsPrice = links.select("span");
-                String price = elementsPrice.text();
-                Log.i("金币商品信息", "\n\n" + "link_no_host = " + link_no_host + "\n" + "imgUrl = " + imgUrl + "\n" + "goods_id = " + goods_id + "\n" + "goods_name = " + goods_name + "\n" + "price = " + price + "\n");
-            }
-
-        } catch (Exception e) {
-            Log.i("errMsg", e.toString());
-        }
-
-        Log.w(TAG,"金币商品数据准备完毕");
-    }
-
 
 }

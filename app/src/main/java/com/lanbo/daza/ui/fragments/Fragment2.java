@@ -1,4 +1,4 @@
-package com.lanbo.daza.ui;
+package com.lanbo.daza.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
