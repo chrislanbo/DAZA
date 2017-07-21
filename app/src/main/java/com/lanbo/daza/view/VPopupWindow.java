@@ -18,11 +18,11 @@ import com.lanbo.daza.adapter.ListPopupWindowAdapter;
 
 import java.util.List;
 
-public class RankingPopupWindow extends PopupWindow {
+public class VPopupWindow extends PopupWindow {
     private ListPopupWindowAdapter mListPopupWindowAdapter;
     private Listener mListener;
 
-    public RankingPopupWindow(final Activity context, List<String> list, String selectName, Listener listener, View view) {
+    public VPopupWindow(final Activity context, List<String> list, String selectName, Listener listener, View view) {
         super(context);
         mListener = listener;
         //拿到基本的item高度，这里给定每个Item的高度和宽度  
@@ -46,7 +46,7 @@ public class RankingPopupWindow extends PopupWindow {
         this.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         View contentView = LayoutInflater.from(context).inflate(R.layout.popup_window, null);
         this.setContentView(contentView);
-        ListView listView = (ListView) contentView.findViewById(R.id.lv_ranking_classify);
+        ListView listView = (ListView) contentView.findViewById(R.id.lv_pop);
         LinearLayout.LayoutParams lp;
         lp = (LinearLayout.LayoutParams) listView.getLayoutParams();
         lp.height = height;
@@ -78,7 +78,6 @@ public class RankingPopupWindow extends PopupWindow {
         listView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // TODO Auto-generated method stub  
                 dismiss();
                 return true;
             }
