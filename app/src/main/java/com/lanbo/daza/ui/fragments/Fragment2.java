@@ -33,4 +33,34 @@ public class Fragment2 extends Fragment {
     public void showPop(View v){
         ToastUtil.show(getActivity(),"show"+v.getId());
     }
-}
+
+//    RankingPopupWindow mWindow;
+//    private void initListItem(final List<String> list, final int flag, final String selectName){
+//        //生成Listener和清空
+//        setPopupWindowListener();
+//        mWindow = null;
+//        //显示popupwindow
+//        if(flag == LEFT){
+//            mWindow = new RankingPopupWindow(this,list,selectName,listener,mLeftWeightLayout);
+//        }else if(flag == RIGHT){
+//            mWindow = new RankingPopupWindow(this,list,selectName,listener,mRightWeightLayout);
+//        }
+//    }
+
+
+
+//    RankingPopupWindow.Listener listener;
+//    private void setPopupWindowListener(){
+//        listener = null;
+//        listener = new RankingPopupWindow.Listener() {
+//            @Override
+//            public void onPopupWindowDismissListener() {
+//                //消失时的操作
+//            }
+//
+//            @Override
+//            public void onItemClickListener(int position) {
+//                //点击Item时的操作
+//            }
+//        }
+    }
