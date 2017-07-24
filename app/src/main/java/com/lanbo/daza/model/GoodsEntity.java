@@ -12,6 +12,7 @@ public class GoodsEntity implements Serializable {
     private String goods_id;  // 商品id
     private String goods_name;  // 商品名称
     private String price;   // 商品价格
+    private String goods_num; //商品数量
 
     public GoodsEntity() {
     }
@@ -22,6 +23,15 @@ public class GoodsEntity implements Serializable {
         this.goods_id = goods_id;
         this.goods_name = goods_name;
         this.price = price;
+    }
+
+    public GoodsEntity(String link_no_host, String imgUrl, String goods_id, String goods_name, String price, String goods_num) {
+        this.link_no_host = link_no_host;
+        this.imgUrl = imgUrl;
+        this.goods_id = goods_id;
+        this.goods_name = goods_name;
+        this.price = price;
+        this.goods_num = goods_num;
     }
 
     public String getLink_no_host() {
@@ -64,6 +74,14 @@ public class GoodsEntity implements Serializable {
         this.price = price;
     }
 
+    public String getGoods_nums() {
+        return goods_num;
+    }
+
+    public void setGoods_nums(String goods_num) {
+        this.goods_num = goods_num;
+    }
+
     @Override
     public String toString() {
         return "GoodsEntity{" +
@@ -72,6 +90,7 @@ public class GoodsEntity implements Serializable {
                 ", goods_id='" + goods_id + '\'' +
                 ", goods_name='" + goods_name + '\'' +
                 ", price='" + price + '\'' +
+                ", goods_num='" + goods_num + '\'' +
                 '}';
     }
 }

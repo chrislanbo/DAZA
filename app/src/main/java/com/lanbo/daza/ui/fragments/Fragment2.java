@@ -22,6 +22,10 @@ import butterknife.OnClick;
 import static android.view.Gravity.LEFT;
 import static android.view.Gravity.RIGHT;
 
+
+/**
+ * 蜜拓蜜商城页面
+ */
 public class Fragment2 extends Fragment {
 
     @BindView(R.id.ll_category_pop)
@@ -80,8 +84,18 @@ public class Fragment2 extends Fragment {
             public void onItemClickListener(int position) {
                 //点击Item时的操作
                 selectIndex = position;
+                chooseItem(position);
             }
         };
+    }
+
+    /**
+     * 选中item
+     *
+     * @param pos 点击相应item
+     */
+    private void chooseItem(int pos) {
+        ToastUtil.show(getActivity(), "点击了" + pos + "位置 value=" + categoryList.get(pos));
     }
 
 }
