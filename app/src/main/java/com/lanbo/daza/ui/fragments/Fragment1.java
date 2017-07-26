@@ -96,7 +96,6 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     private List<GoodsEntity> goodsList = new ArrayList<>();
     private List<FunctionEntity> funcList = new ArrayList<>();
     private List<NewsEntity> newsList = new ArrayList<>();
-    private List<UserInfo> info = new ArrayList<>();
     private List<Address> addressList = new ArrayList<>();
 
     private HeaderBannerView headerBannerView; // 广告视图
@@ -169,8 +168,6 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 handleADS();
                 handleAddress();
                 Message msg = new Message();
-                // 消息对象可以携带数据
-//                msg.obj = goodsList;
                 msg.what = 1;
                 handler.sendMessage(msg);
 
