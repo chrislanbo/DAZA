@@ -94,3 +94,14 @@ onActivityCreated() —— 当activity的onCreated()方法返回后调用此方�
 onDestroyView() —— 当fragment中的视图被移除的时候，调用这个方法。
 onDetach() —— 当fragment和activity分离的时候，调用这个方法。
 一旦activity进入resumed状态（也就是running状态），你就可以自由地添加和删除fragment了。因此，只有当activity在resumed状态时，fragment的生命周期才能独立的运转，其它时候是依赖于activity的生命周期变化的。
+
+
+购物车逻辑
+
+首次进入获取服务端数据
+设置本地数据标记
+设置需要从服务端获取数据标记
+
+
+再次进去app不加载服务端数据
+提交订单时，获取服务器订单数据比对本地

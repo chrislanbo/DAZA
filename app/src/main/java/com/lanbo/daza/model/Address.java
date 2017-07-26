@@ -5,25 +5,37 @@ import java.io.Serializable;
 /**
  * Created by wumeng051 on 2017/7/18.
  * 地址
- *
- name = 拉拉
- phone = 13612212121
- province省 = 上海市
- city市 = 市辖区
- county区/县 = 黄浦区
- detail = 上海黄埔军校
- url = /Mobile/user/edit_address.html?id=12558
- id = 12558
+ * <p>
+ * name = 拉拉
+ * phone = 13612212121
+ * province省 = 上海市
+ * city市 = 市辖区
+ * county区/县 = 黄浦区
+ * detail = 上海黄埔军校
+ * url = /Mobile/user/edit_address.html?id=12558
+ * id = 12558
  */
 
 public class Address implements Serializable {
-    private String name ;
-    private String phone ;
-    private String province ;
-    private String county ;
-    private String detail ;
-    private String url ;
-    private String id ;
+    private String name; // 名字
+    private String phone; // 手机号
+    private String province;// 省直辖市
+    private String city; // 市辖区
+    private String county; // 区/县
+    private String detail; // 具体地址
+    private String url; // 链接
+    private String id; // ID
+
+    public Address(String name, String phone, String province, String city, String county, String detail, String url, String id) {
+        this.name = name;
+        this.phone = phone;
+        this.province = province;
+        this.city = city;
+        this.county = county;
+        this.detail = detail;
+        this.url = url;
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -47,6 +59,14 @@ public class Address implements Serializable {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCounty() {
@@ -79,5 +99,19 @@ public class Address implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", county='" + county + '\'' +
+                ", detail='" + detail + '\'' +
+                ", url='" + url + '\'' +
+                ", id='" + id + '\'' +
+                '}';
     }
 }

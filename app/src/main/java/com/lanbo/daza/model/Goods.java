@@ -8,17 +8,25 @@ import java.io.Serializable;
  */
 
 public class Goods implements Serializable {
-    private Long id;
+    private String id;
     private String name;
     private String imgUrl;
     private String description;
     private Float price;
 
-    public Long getId() {
+    public Goods(String id, String name, String imgUrl, String description, Float price) {
+        this.id = id;
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.description = description;
+        this.price = price;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

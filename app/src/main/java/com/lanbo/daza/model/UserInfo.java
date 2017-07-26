@@ -15,6 +15,15 @@ public class UserInfo implements Serializable {
     private String weixin;
     private String code;
 
+    public UserInfo(String head_pic_url, String username, String sex, String phone, String weixin, String code) {
+        this.head_pic_url = head_pic_url;
+        this.username = username;
+        this.sex = sex;
+        this.phone = phone;
+        this.weixin = weixin;
+        this.code = code;
+    }
+
     public String getHead_pic_url() {
         return head_pic_url;
     }
@@ -61,5 +70,17 @@ public class UserInfo implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "head_pic_url='" + head_pic_url + '\'' +
+                ", username='" + username + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", weixin='" + weixin + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }

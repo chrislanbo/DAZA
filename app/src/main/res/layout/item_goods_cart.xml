@@ -15,6 +15,7 @@
         android:orientation="horizontal">
 
         <CheckBox
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical" />
@@ -115,7 +116,7 @@
                         android:layout_height="wrap_content"
                         app:btnAddBackground="@drawable/selector_corners_3dp_button"
                         app:btnSubBackground="@drawable/selector_corners_3dp_button"
-                        app:value="3" />
+                        app:value="1" />
 
                     <TextView
                         android:id="@+id/tv_delete"
@@ -147,4 +148,9 @@
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider_2" />
 </LinearLayout>

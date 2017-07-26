@@ -11,6 +11,17 @@ public class Cart extends Goods implements Serializable{
     private int count;
     private boolean isChecked = true;
 
+
+    public Cart(String id, String name, String imgUrl, String description, Float price) {
+        super(id, name, imgUrl, description, price);
+    }
+
+    public Cart(String id, String name, String imgUrl, String description, Float price, int count, boolean isChecked) {
+        super(id, name, imgUrl, description, price);
+        this.count = count;
+        this.isChecked = isChecked;
+    }
+
     public int getCount() {
         return count;
     }

@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.TintTypedArray;
 import android.text.InputType;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,7 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
     private LayoutInflater mInflater;
 
     private int minValue = 1;
-    private int maxValue;
+    private int maxValue = 999;
     private int value;
 
     private OnButtonClickListener mOnButtonClickListener;
@@ -61,7 +62,7 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
             setMinValue(minValue);
 
             //maxValue
-            int maxValue = a.getInt(R.styleable.NumberAddSubView_maxvalue, 0);
+            int maxValue = a.getInt(R.styleable.NumberAddSubView_maxvalue, 999);
             setMaxValue(maxValue);
 
             Drawable btnAdd = a.getDrawable(R.styleable.NumberAddSubView_btnAddBackground);
@@ -160,6 +161,7 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
         if (value < maxValue) {
             value += 1;
         }
+        Log.i("numAdd","点击＋  当前value = "+value);
         //value是数字，必须强制转换成字符串，否则被认为是资源id
         mTvNum.setText(value + "");
 
@@ -173,12 +175,15 @@ public class NumberAddSubView extends LinearLayout implements View.OnClickListen
         if (value > minValue) {
             value -= 1;
         }
+        Log.i("numSub","点击-  当前value = "+value);
         mTvNum.setText(value + "");
 
     }
 
     @Override
     public void onClick(View v) {
+        Log.i("加减控件点击","当前minValue = "+minValue);
+        Log.i("加减控件点击","当前maxValue = "+maxValue);
         if (v.getId() == R.id.btn_add) {
             numAdd();
             if (mOnButtonClickListener != null) {

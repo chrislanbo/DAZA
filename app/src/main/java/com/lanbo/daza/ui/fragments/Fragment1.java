@@ -17,15 +17,19 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.lanbo.daza.MyApplication;
 import com.lanbo.daza.R;
 import com.lanbo.daza.adapter.NewsAdapter;
+import com.lanbo.daza.model.Address;
 import com.lanbo.daza.model.FunctionEntity;
 import com.lanbo.daza.model.GoodsEntity;
 import com.lanbo.daza.model.NewsEntity;
+import com.lanbo.daza.model.UserInfo;
 import com.lanbo.daza.ui.AboutActivity;
 import com.lanbo.daza.utils.ColorUtil;
 import com.lanbo.daza.utils.DensityUtil;
+import com.lanbo.daza.utils.JSONUtil;
 import com.lanbo.daza.utils.ModelUtil;
 import com.lanbo.daza.utils.PreferencesUtils;
 import com.lanbo.daza.utils.StatusBarUtil;
@@ -53,12 +57,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.lanbo.daza.Constant.INFO_CODE;
 import static com.lanbo.daza.Constant.INFO_HEAD_PIC;
-import static com.lanbo.daza.Constant.INFO_PHONE;
-import static com.lanbo.daza.Constant.INFO_SEX;
-import static com.lanbo.daza.Constant.INFO_USERNAME;
-import static com.lanbo.daza.Constant.INFO_WEIXIN;
 import static com.lanbo.daza.Constant.addressInfoUrl;
 import static com.lanbo.daza.Constant.baseNewsUrl;
 import static com.lanbo.daza.Constant.baseUrl;
@@ -83,15 +82,22 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     FrameLayout flActionMore;
 
     private static String TAG = Fragment1.class.getSimpleName();
+    public static String NEWS_DATA = "news_data";
+    public static String HAS_NEWS_DATA = "has_news_data";
+    public static String HOME_GOODS = "home_goods";
+
     private Context mContext;
     private Activity mActivity;
     private View rootView;
     private int mScreenHeight; // 屏幕高度
 
     private List<String> bannerList = new ArrayList<>(); // 广告数据
+    private List<String> adsList = new ArrayList<>(); // 商城页面广告数据
     private List<GoodsEntity> goodsList = new ArrayList<>();
     private List<FunctionEntity> funcList = new ArrayList<>();
     private List<NewsEntity> newsList = new ArrayList<>();
+    private List<UserInfo> info = new ArrayList<>();
+    private List<Address> addressList = new ArrayList<>();
 
     private HeaderBannerView headerBannerView; // 广告视图
     private HeaderDividerView headerDividerView; // 分割线占位图
@@ -116,13 +122,14 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     private boolean isStickyTop = false; // 是否吸附在顶部
     private boolean isSmooth = false; // 没有吸附的前提下，是否在滑动
 
+    Map<String, String> header = MyApplication.getHeader();
+
     // 此方法在主线程中调用，可以更新UI
     Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 1:
                     ToastUtil.show(mContext, "请求成功");
-                    goodsList = (List<GoodsEntity>) msg.obj;
                     Log.i(TAG, " list " + goodsList.size());
                     initData();
                     initView();
@@ -141,38 +148,109 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        this.mActivity = getActivity();
+        this.mContext = getActivity();
         Thread netThread = new Thread() {
             @Override
             public void run() {
                 // 获取新闻
-                getNews();
-
-                getHomeGoods();
-
-
-                Map<String, String> header = MyApplication.getHeader();
-
+                handleNews();
+                handleHomeGoods();
                 // 获取首页最新资讯
 //                getTopNews();
-
-
+                //获取订单个数
                 ArrayList orderNum = getOrderNum(header);
 
                 for (int i = 0; i < myOrder.length; i++) {
                     PreferencesUtils.putString(mContext, myOrder[i], (String) orderNum.get(i));
                 }
 
-                getInfo(header);
-                getGoodsBanner();
-
-                getAddress(header);
-//                地址
+                handleUserInfo();
+                handleADS();
+                handleAddress();
+                Message msg = new Message();
+                // 消息对象可以携带数据
+//                msg.obj = goodsList;
+                msg.what = 1;
+                handler.sendMessage(msg);
 
             }
         };
         netThread.start();
 
+    }
+
+    private void handleADS() {
+        String json = PreferencesUtils.getString(mContext, ADS_DATA);
+        if (json != null && json.length() > 0) {
+            Log.i(TAG, "run: 商城广告，本地有数据");
+            adsList = JSONUtil.fromJson(json, new TypeToken<List<String>>() {
+            }.getType());
+            for (int i = 0; i < adsList.size(); i++) {
+                Log.i("商城广告页", "" + adsList.get(i));
+            }
+        } else {
+            Log.i(TAG, "run: 商城广告，本地无数据，加载网络");
+            getGoodsBanner();
+        }
+    }
+
+    private void handleUserInfo() {
+        String json = PreferencesUtils.getString(mContext, INFO_DATA);
+        if (json != null && json.length() > 0) {
+            Log.i(TAG, "run: 个人信息有数据，本地加载");
+            UserInfo info = JSONUtil.fromJson(json, new TypeToken<UserInfo>() {
+            }.getType());
+            Log.i(TAG, "handleUserInfo: 用户信息 " + info);
+        } else {
+            getInfo(header);
+            Log.i(TAG, "run: 个人信息没有数据，请求网络");
+        }
+    }
+
+    private void handleAddress() {
+        String json = PreferencesUtils.getString(mContext, ADDRESS_DATA);
+        if (json != null && json.length() > 0) {
+            Log.i(TAG, "run: 地址有数据，本地加载");
+            addressList = null;
+            addressList = JSONUtil.fromJson(json, new TypeToken<List<Address>>() {
+            }.getType());
+        } else {
+            Log.i(TAG, "run: 地址没有数据，请求网络");
+            getAddress(header);
+        }
+    }
+
+    public static String INFO_DATA = "info_data";
+    public static String ADDRESS_DATA = "address_data";
+    public static String ADS_DATA = "ads_data";
+
+    private void handleHomeGoods() {
+        String homeGoodsJson = PreferencesUtils.getString(mContext, HOME_GOODS);
+        if (homeGoodsJson != null && homeGoodsJson.length() > 0) {
+            Log.i(TAG, "run: 首页商品有数据，本地加载");
+            goodsList = null;
+            goodsList = JSONUtil.fromJson(homeGoodsJson, new TypeToken<List<GoodsEntity>>() {
+            }.getType());
+        } else {
+            Log.i(TAG, "run: 首页商品没有数据，请求网络");
+            getHomeGoods();
+        }
+    }
+
+    private void handleNews() {
+        String newsJson = PreferencesUtils.getString(mContext, NEWS_DATA);
+        Log.i(TAG, "run: 新闻数据：" + newsJson);
+        if (newsJson != null && newsJson.length() > 0) {
+            Log.i(TAG, "run: 新闻有数据，本地加载");
+            newsList = null;// 清空集合
+            // 赋值集合，返回对象集合
+            newsList = JSONUtil.fromJson(newsJson, new TypeToken<List<NewsEntity>>() {
+            }.getType());
+        } else {
+            Log.i(TAG, "run: 新闻没有数据去请求数据");
+            getNews();
+        }
     }
 
     private void getHomeGoods() {
@@ -193,11 +271,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 Log.i("商品信息", "\n\n" + "link_no_host = " + link_no_host + "\n" + "imgUrl = " + imgUrl + "\n" + "goods_id = " + goods_id + "\n" + "goods_name = " + goods_name + "\n" + "price = " + price + "\n");
                 goodsList.add(new GoodsEntity(link_no_host, imgUrl, goods_id, goods_name, price));
             }
-            Message msg = new Message();
-            // 消息对象可以携带数据
-            msg.obj = goodsList;
-            msg.what = 1;
-            handler.sendMessage(msg);
+            PreferencesUtils.putString(mContext, HOME_GOODS, JSONUtil.toJson(goodsList));
 
         } catch (Exception e) {
             Log.i("mytag", e.toString());
@@ -229,8 +303,11 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 String url = e.select("a.edit").attr("href"); // 收货人地址
                 int a1 = url.indexOf("=") + 1;
                 String id = url.substring(a1);
-                Log.i("商品信息", "\n\n" + "name = " + name + "\n" + "phone = " + phone +
+                Log.i("地址信息:", "\n\n" + "name = " + name + "\n" + "phone = " + phone +
                         "\n" + "省 = " + a + "\n" + "市 = " + b + "\n" + "区/县 = " + c + "\n" + "详细地址 = " + d + "\n" + "url = " + url + "\n" + "id = " + id + "\n");
+
+                addressList.add(new Address(name, phone, a, b, c, d, url, id));
+                PreferencesUtils.putString(mContext, ADDRESS_DATA, JSONUtil.toJson(addressList));
             }
 
 
@@ -249,6 +326,8 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 String id = href.substring(i + 1);
                 String attr = elements.select("img").attr("src");
                 Log.i("商品页轮播", "\n" + "id = " + id + "\n" + " attr = " + attr + "\n");
+                adsList.add(attr);
+                PreferencesUtils.putString(mContext, ADS_DATA, JSONUtil.toJson(adsList));
             }
 
         } catch (IOException e) {
@@ -315,6 +394,9 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 Log.i("新闻", "\n" + "newsImg = " + newsImg + "\n" + " newsUrl=" + newsUrl + "\n" + "newsTitle=" + newsTitle + "\n" + "newsContent=" + newsContent);
             }
 
+            PreferencesUtils.putString(mContext, NEWS_DATA, JSONUtil.toJson(newsList));
+            PreferencesUtils.putBoolean(mContext, HAS_NEWS_DATA, true);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -350,11 +432,14 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                     + "\n" + "weixin=" + weixin + "\n" + "address=" + address + "\n" + "changePwd=" + changePwd + "\n" + "code码=" + code);
 
 //            PreferencesUtils.putString(mContext,INFO_HEAD_PIC,head_pic_url);
-            PreferencesUtils.putString(mContext, INFO_USERNAME, username);
-            PreferencesUtils.putString(mContext, INFO_SEX, sex);
-            PreferencesUtils.putString(mContext, INFO_PHONE, phone);
-            PreferencesUtils.putString(mContext, INFO_WEIXIN, weixin);
-            PreferencesUtils.putString(mContext, INFO_CODE, code);
+//            PreferencesUtils.putString(mContext, INFO_USERNAME, username);
+//            PreferencesUtils.putString(mContext, INFO_SEX, sex);
+//            PreferencesUtils.putString(mContext, INFO_PHONE, phone);
+//            PreferencesUtils.putString(mContext, INFO_WEIXIN, weixin);
+//            PreferencesUtils.putString(mContext, INFO_CODE, code);
+
+            UserInfo userInfo = new UserInfo(head_pic_url, username, sex, phone, weixin, code);
+            PreferencesUtils.putString(mContext, INFO_DATA, JSONUtil.toJson(userInfo));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -366,8 +451,6 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_main, null);
         ButterKnife.bind(this, rootView);
-        this.mActivity = getActivity();
-        this.mContext = getActivity();
         return rootView;
     }
 
