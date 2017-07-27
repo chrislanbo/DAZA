@@ -363,4 +363,12 @@ public class SmoothListView extends ListView implements OnScrollListener {
 
         void onLoadMore();
     }
+
+    @Override
+    public void fling(int velocityY) {
+//        控制滑动速度
+        super.fling(velocityY / 4);
+    }
+
+
 }

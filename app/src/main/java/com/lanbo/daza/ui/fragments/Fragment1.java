@@ -68,6 +68,7 @@ import static com.lanbo.daza.utils.Tools.fixUrl;
 
 public class Fragment1 extends Fragment implements SmoothListView.ISmoothListViewListener, SmoothListView.OnSmoothScrollListener {
 
+
     @BindView(R.id.listView)
     SmoothListView smoothListView;
     @BindView(R.id.rl_bar)
@@ -85,7 +86,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     public static String NEWS_DATA = "news_data";
     public static String HAS_NEWS_DATA = "has_news_data";
     public static String HOME_GOODS = "home_goods";
-
+    public static final String ORDER_NUM = "order_num";
     private Context mContext;
     private Activity mActivity;
     private View rootView;
@@ -93,6 +94,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
 
     private List<String> bannerList = new ArrayList<>(); // 广告数据
     private List<String> adsList = new ArrayList<>(); // 商城页面广告数据
+    private List<String> numList = new ArrayList<>(); // 订单数据
     private List<GoodsEntity> goodsList = new ArrayList<>();
     private List<FunctionEntity> funcList = new ArrayList<>();
     private List<NewsEntity> newsList = new ArrayList<>();
@@ -117,7 +119,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     private View itemHeaderFilterView; // 从ListView获取的筛选子View
     private int filterViewPosition = 4; // 筛选视图的位置
     private int filterViewTopMargin; // 筛选视图距离顶部的距离
-    private boolean isScrollIdle = true; // ListView是否在滑动
+    private boolean isScrollIdle = true; // 停止滑动
     private boolean isStickyTop = false; // 是否吸附在顶部
     private boolean isSmooth = false; // 没有吸附的前提下，是否在滑动
 
@@ -157,12 +159,9 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 handleHomeGoods();
                 // 获取首页最新资讯
 //                getTopNews();
-                //获取订单个数
-                ArrayList orderNum = getOrderNum(header);
 
-                for (int i = 0; i < myOrder.length; i++) {
-                    PreferencesUtils.putString(mContext, myOrder[i], (String) orderNum.get(i));
-                }
+
+                handleOrderNum();
 
                 handleUserInfo();
                 handleADS();
@@ -174,6 +173,24 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
             }
         };
         netThread.start();
+
+    }
+
+    private void handleOrderNum() {
+        String json = PreferencesUtils.getString(mContext, ORDER_NUM);
+        if (json != null && json.length() > 0) {
+            Log.i(TAG, "run: 订单数量有数据");
+            numList = null;
+            numList = JSONUtil.fromJson(json, new TypeToken<List<String>>() {
+            }.getType());
+        } else {
+            Log.i(TAG, "run: 订单数量无数据，请求网络");
+            numList = getOrderNum(header);
+        }
+
+        for (int i = 0; i < myOrder.length; i++) {
+            PreferencesUtils.putString(mContext, myOrder[i], numList.get(i));
+        }
 
     }
 
@@ -324,7 +341,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 String attr = elements.select("img").attr("src");
                 Log.i("商品页轮播", "\n" + "id = " + id + "\n" + " attr = " + attr + "\n");
                 adsList.add(attr);
-                PreferencesUtils.putString(mContext, ADS_DATA, JSONUtil.toJson(adsList));
+                PreferencesUtils.putString(getContext(), ADS_DATA, JSONUtil.toJson(adsList));
             }
 
         } catch (IOException e) {
@@ -349,6 +366,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
                 String a = links.text();
                 list.add(a);
             }
+            PreferencesUtils.putString(mContext, ORDER_NUM, JSONUtil.toJson(list));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -535,12 +553,10 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
 
     }
 
-    float lastSpace = 0;
-
     // 处理标题栏颜色渐变
     private void handleTitleBarColorEvaluate() {
-        Log.d(TAG, "处理标题栏颜色渐变");
         float fraction;
+//        下拉状态
         if (bannerViewTopMargin > 0) {
             fraction = 1f - bannerViewTopMargin * 1f / 60;
             Log.d(TAG, "透明度 ： " + fraction);
@@ -549,34 +565,36 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
             return;
         }
 
-        float space = Math.abs(bannerViewTopMargin) * 1f;
+        float space = Math.abs(bannerViewTopMargin) * 1f; //划出距离
         fraction = space / (bannerViewHeight - titleViewHeight);
         if (fraction < 0f) {
             fraction = 0f;
-        } else if (fraction > 1f) {
+        } else if (fraction >= 1f) {
             fraction = 1f;
-        } else {
-            Log.d(TAG, "space =" + space);
-            if (lastSpace == space && lastSpace != 0f) {
-                Log.d(TAG, "出问题了-------");
-            }
-            lastSpace = space;
         }
-        Log.d(TAG, "透明度 ： " + fraction + "统一设置为不透明");
-        rlBar.setAlpha(1f);
+//        Log.d(TAG, "透明度 ： " + fraction + "统一设置为不透明");
+//        rlBar.setAlpha(1f);
 
         if (fraction >= 1f) {
-            Log.d(TAG, "不透明或者吸附 ： " + 0f);
-            viewTitleBg.setAlpha(0f);
-            viewActionMoreBg.setAlpha(0f);
+            Log.d(TAG, "fraction>=1  ： " + 0f);
+            setBg(0f);
             rlBar.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
         } else {
-            Log.d(TAG, " fraction<1 且 没有吸附： " + (1f - fraction));
-            viewTitleBg.setAlpha(1f - fraction);
-            viewActionMoreBg.setAlpha(1f - fraction);
+            Log.d(TAG, " fraction<1 ： " + (1f - fraction));
+            setBg(1f - fraction);
             rlBar.setBackgroundColor(ColorUtil.getNewColorByStartEndColor(mContext, fraction, R.color.transparent, R.color.colorPrimary));
         }
     }
+
+    /**
+     * 设置背景透明度，0f 为不透明 1f为全透明
+     * @param v 值
+     */
+    private void setBg(float v) {
+        viewTitleBg.setAlpha(v);
+        viewActionMoreBg.setAlpha(v);
+    }
+
 
     @Override
     public void onResume() {
@@ -628,45 +646,53 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         isScrollIdle = (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE);
+        Log.i(TAG, "onScrollStateChanged: 滑动停止" + isScrollIdle);
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        if (isScrollIdle && bannerViewTopMargin < 0) return;
+        //停止滑动，
+        if (isScrollIdle && bannerViewTopMargin < 0) {
+            Log.i(TAG, "onScroll: 停止在正常位置");
+            return;
+        }
         // 获取广告头部View、自身的高度、距离顶部的高度
         if (itemHeaderBannerView == null) {
             itemHeaderBannerView = smoothListView.getChildAt(1);
-        }
-        if (itemHeaderBannerView != null) {
+        } else {
             bannerViewTopMargin = DensityUtil.px2dip(mContext, itemHeaderBannerView.getTop());
             bannerViewHeight = DensityUtil.px2dip(mContext, itemHeaderBannerView.getHeight());
-            Log.d(TAG, "  111 " + bannerViewHeight + "   " + bannerViewTopMargin);
+            Log.d(TAG, "  轮播高度 " + bannerViewHeight + " 距离顶部的距离  " + bannerViewTopMargin + " 第一个可见item = " + firstVisibleItem);
         }
 
         // 获取筛选View、距离顶部的高度
-        if (itemHeaderFilterView == null) {
-            itemHeaderFilterView = smoothListView.getChildAt(filterViewPosition - firstVisibleItem);
-        }
-        if (itemHeaderFilterView != null) {
-            filterViewTopMargin = DensityUtil.px2dip(mContext, itemHeaderFilterView.getTop());
-        }
+//        if (itemHeaderFilterView == null) {
+//            itemHeaderFilterView = smoothListView.getChildAt(filterViewPosition -              firstVisibleItem);
+//        } else {
+//            filterViewTopMargin = DensityUtil.px2dip(mContext, itemHeaderFilterView.getTop());
+//        }
 
         // 处理筛选是否吸附在顶部
-        if (filterViewTopMargin <= titleViewHeight || firstVisibleItem > filterViewPosition) {
-            isStickyTop = true; // 吸附在顶部
-        } else {
-            isStickyTop = false; // 没有吸附在顶部
-        }
+//        if (filterViewTopMargin <= titleViewHeight || firstVisibleItem > filterViewPosition) {
+//            isStickyTop = true; // 吸附在顶部
+//        } else {
+//            isStickyTop = false; // 没有吸附在顶部
+//        }
 
-        if (isSmooth && isStickyTop) {
-            isSmooth = false;
-        }
+//        if (isSmooth && isStickyTop) {
+//            isSmooth = false;
+//        }
 
-        if (bannerViewTopMargin != 0) {
-            // 处理标题栏颜色渐变
+        if (firstVisibleItem == 0) {
+            Log.i(TAG, "onScroll: 修复一下标题栏-透明");
+            setBg(1f);
+            rlBar.setBackgroundColor(mContext.getResources().getColor(R.color.transparent));
+        } else if (firstVisibleItem == 1) {
             handleTitleBarColorEvaluate();
+        } else {
+            Log.i(TAG, "onScroll: 修复一下标题栏-完全不透明");
+            setBg(0f);
+            rlBar.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
         }
     }
-
-
 }
