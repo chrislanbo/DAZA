@@ -151,6 +151,10 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
         super.onCreate(savedInstanceState);
         this.mActivity = getActivity();
         this.mContext = getActivity();
+        startThread();
+    }
+
+    private void startThread() {
         Thread netThread = new Thread() {
             @Override
             public void run() {
@@ -173,7 +177,6 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
             }
         };
         netThread.start();
-
     }
 
     private void handleOrderNum() {
@@ -191,7 +194,6 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
         for (int i = 0; i < myOrder.length; i++) {
             PreferencesUtils.putString(mContext, myOrder[i], numList.get(i));
         }
-
     }
 
     private void handleADS() {
@@ -466,6 +468,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_main, null);
         ButterKnife.bind(this, rootView);
+//        startThread();
         return rootView;
     }
 
@@ -473,8 +476,6 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         StatusBarUtil.setStatusBarTranslucent(mActivity, false);
-
-
     }
 
 
@@ -534,6 +535,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
         smoothListView.setAdapter(newsAdapter);
 
         filterViewPosition = smoothListView.getHeaderViewsCount() - 1;
+        onResume();
     }
 
     private void initListener() {
@@ -588,6 +590,7 @@ public class Fragment1 extends Fragment implements SmoothListView.ISmoothListVie
 
     /**
      * 设置背景透明度，0f 为不透明 1f为全透明
+     *
      * @param v 值
      */
     private void setBg(float v) {

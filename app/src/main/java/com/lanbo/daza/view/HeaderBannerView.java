@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -155,6 +156,7 @@ public class HeaderBannerView extends AbsHeaderView<List<String>> {
      * 添加Banner循环消息到队列
      */
     public void enqueueBannerLoopMessage() {
+        Log.i("TAG", "enqueueBannerLoopMessage: ");
         if (ivList == null || ivList.size() <= 1) return;
         mHandler.sendEmptyMessageDelayed(BANNER_TYPE, BANNER_TIME);
     }
@@ -163,6 +165,7 @@ public class HeaderBannerView extends AbsHeaderView<List<String>> {
      * 移除Banner循环的消息
      */
     public void removeBannerLoopMessage() {
+        Log.i("TAG", "removeBannerLoopMessage: ");
         if (mHandler.hasMessages(BANNER_TYPE)) {
             mHandler.removeMessages(BANNER_TYPE);
         }

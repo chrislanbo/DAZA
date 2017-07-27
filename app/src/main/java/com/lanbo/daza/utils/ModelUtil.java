@@ -71,6 +71,19 @@ public class ModelUtil {
         return list;
     }
 
+    private static int[] images2 = {R.drawable.icon_01,R.drawable.icon_02,R.drawable.icon_03,R.drawable.icon_04,
+            R.drawable.icon_05,R.drawable.icon_06,R.drawable.icon_07,R.drawable.icon_08,};
+    private static String[] texts2 = {"蜜拓蜜商城","金币商城","产品中心","在线开卡","代理风采","金牌讲师","公司简介","团队管理",};
+    // 频道数据
+    public static List<FunctionEntity> getFunctionData2() {
+        int size = images2.length;
+        List<FunctionEntity> list = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            list.add(new FunctionEntity(texts2[i],images2[i]));
+        }
+        return list;
+    }
+
     // 运营数据
     public static List<OperationEntity> getOperationData() {
         List<OperationEntity> operationList = new ArrayList<>();

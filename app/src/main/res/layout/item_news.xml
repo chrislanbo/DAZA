@@ -59,7 +59,7 @@
                     android:paddingBottom="2dp"
                     android:paddingRight="4dp"
                     android:paddingTop="2dp"
-                    android:maxLines="3"
+                    android:maxLines="2"
                     android:textColor="@color/text_light"
                     android:textSize="10sp"
                     tools:text="蜜拓蜜董事长张爱林先生拜师中国灸父田从豁，这是具有划时代意义的灸法传承，我们老顽童张爱林势必会将中国灸法发扬光大，带着匠心精神发展蜜拓蜜，造福于国人健康，为更多的家庭带去幸福感。" />
