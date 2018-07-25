@@ -16,6 +16,13 @@ public class Constant {
     public final static String BRAND_LIST = "brand_list"; // 品牌分类
     public static final String BRAND_GOODS_LIST = "brand_goods_list";
 
+
+    public static final String ALL_GOODS = "http://app.mituomi.com/Mobile/index/goods_list.html?list=5";//全部商品
+    public static final String HOTS_GOODS = "http://app.mituomi.com/Mobile/index/goods_list.html?list=2";//热卖商品
+    public static final String DISCOUNT_GOODS = "http://app.mituomi.com/Mobile/index/goods_list.html?list=3";//折扣商品
+    public static final String PRE_GOODS = "http://app.mituomi.com/Mobile/index/goods_list.html?list=4";//预售商品
+
+
     // tabBar 链接
     public final static String M2M = "/Mobile/index/index.html";// 首页
     public final static String GLOD = "/Mobile/gold/index.html";// 金币商城
